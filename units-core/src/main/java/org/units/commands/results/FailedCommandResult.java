@@ -3,7 +3,7 @@ package org.units.commands.results;
 /**
  * Created on 23.08.2015.
  */
-public class FailedCommandResult implements CommandResult{
+public class FailedCommandResult extends DefaultCommandResult{
 
     private final String cause;
     private Exception exception;

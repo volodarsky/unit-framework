@@ -5,7 +5,7 @@ import org.units.Position;
 /**
  * Created on 23.08.2015.
  */
-public class MoveCommandResult implements CommandResult {
+public class MoveCommandResult extends DefaultCommandResult {
 
     private final Position from;
     private final Position to;

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created on 23.08.2015.
  */
-public class CompositeCommandResult implements CommandResult {
+public class CompositeCommandResult extends DefaultCommandResult {
 
     private List<CommandResult> results = new ArrayList<>();
 

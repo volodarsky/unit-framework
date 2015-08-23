@@ -6,6 +6,7 @@ import org.units.commands.Command;
 import org.units.commands.results.CommandResult;
 import org.units.commands.results.FailedCommandResult;
 import org.units.event.CommandEvent;
+import org.units.event.CommandEventSupport;
 
 import java.util.ArrayDeque;
 import java.util.LinkedList;
@@ -19,6 +20,7 @@ public abstract class DefaultUnit implements Unit {
     private Orientation orientation;
     private Position position;
     private Queue<CommandEvent> eventQueue = new LinkedList<>();
+    private CommandEventSupport support;
 
     @Override
     public Orientation to() {
@@ -43,6 +45,11 @@ public abstract class DefaultUnit implements Unit {
     @Override
     public void onCommandEvent(CommandEvent event) {
         eventQueue.add(event);
+    }
+
+    @Override
+    public void addCommandEventSupport(CommandEventSupport support) {
+        this.support = support;
     }
 
     public CommandResult accept(Command command){

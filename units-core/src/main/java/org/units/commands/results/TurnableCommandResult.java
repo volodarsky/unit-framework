@@ -5,7 +5,7 @@ import org.units.Orientation;
 /**
  * Created on 23.08.2015.
  */
-public class TurnableCommandResult implements CommandResult{
+public class TurnableCommandResult extends DefaultCommandResult{
 
     private final Orientation from;
     private final Orientation to;
