@@ -8,6 +8,7 @@ import org.units.commands.results.FailedCommandResult;
 import org.units.event.CommandEvent;
 
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -17,7 +18,7 @@ public abstract class DefaultUnit implements Unit {
 
     private Orientation orientation;
     private Position position;
-    private Queue<CommandEvent> eventQueue = new ArrayDeque<>();
+    private Queue<CommandEvent> eventQueue = new LinkedList<>();
 
     @Override
     public Orientation to() {

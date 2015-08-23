@@ -6,7 +6,7 @@ import org.units.units.Unit;
 /**
  *
  */
-public class UnknownCommand extends UnitDefaultCommand<Unit, FailedCommandResult> {
+public class UnknownCommand implements Command<Unit, FailedCommandResult> {
 
     private final String name;
 

@@ -1,7 +1,5 @@
 package org.units.commands;
 
-import org.units.commands.Command;
-import org.units.commands.UnitDefaultCommand;
 import org.units.commands.results.CommandResult;
 import org.units.commands.results.FailedCommandResult;
 import org.units.units.Unit;
@@ -9,7 +7,7 @@ import org.units.units.Unit;
 /**
  * Decorator for time measurement of wrapping command
  */
-class ExceptionalCommand extends UnitDefaultCommand {
+class ExceptionalCommand implements Command {
 
     private Command wrappedCommand;
 

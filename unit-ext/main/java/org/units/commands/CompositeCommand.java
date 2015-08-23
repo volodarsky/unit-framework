@@ -12,7 +12,7 @@ import java.util.List;
 /**
  *
  */
-public class CompositeCommand extends UnitDefaultCommand<Unit, CompositeCommandResult> {
+public class CompositeCommand implements Command<Unit, CompositeCommandResult> {
 
     private List<Command> commands = new ArrayList<>();
 

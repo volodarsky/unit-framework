@@ -8,7 +8,7 @@ import org.units.units.TurnableUnit;
 /**
  * Created on 20.08.2015.
  */
-public class TurnCommand extends UnitDefaultCommand<TurnableUnit,TurnableCommandResult> {
+public class TurnCommand implements Command<TurnableUnit,TurnableCommandResult> {
 
 
     @Override

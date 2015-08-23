@@ -10,24 +10,32 @@ public interface MovableUnit extends Unit {
 
     int speed();
 
+    boolean canMoveTo(int x, int y);
+
     default void move() {
 
+        Position at = at();
         Orientation orientation = to();
-        switch (orientation) {
-            case NORTH:
-                setAt(Position.of(at().X, at().Y + speed()));
-                break;
-            case WEST:
-                setAt(Position.of(at().X + speed(), at().Y));
-                break;
-            case SOUTH:
-                setAt(Position.of(at().X, at().Y - speed()));
-                break;
-            case EAST:
-                setAt(Position.of(at().X - speed(), at().Y));
-                break;
+        if (orientation == Orientation.NORTH ) {
+            if (canMoveTo(at.X, at.Y + speed())) {
+                setAt(Position.of(at.X, at.Y + speed()));
+            }
+        } else if (orientation == Orientation.WEST) {
+            if (canMoveTo(at.X + speed(), at.Y)) {
+                setAt(Position.of(at.X + speed(), at.Y));
+            }
+        } else if (orientation == Orientation.SOUTH) {
+            if (canMoveTo(at.X, at.Y - speed())) {
+                setAt(Position.of(at.X, at.Y - speed()));
+            }
+        } else if (orientation == Orientation.EAST) {
+            if (canMoveTo(at.X - speed(), at.Y)) {
+                setAt(Position.of(at.X - speed(), at.Y));
+            }
         }
     }
+
+
 
 
 
