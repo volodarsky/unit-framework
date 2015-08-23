@@ -1,21 +1,30 @@
 package org.units.commands;
 
+import org.units.Position;
+import org.units.commands.interceptors.CommandInterceptor;
+import org.units.commands.interceptors.CommandInterceptors;
+import org.units.commands.results.MoveCommandResult;
 import org.units.units.MovableUnit;
 
 /**
  *
  */
-@TimeLoggable
-@Exceptional
-public class MoveCommand extends UnitDefaultCommand<MovableUnit, Boolean> {
+@CommandInterceptors({
+        @CommandInterceptor(ExceptionalCommand.class),
+        @CommandInterceptor(TimeLoggableCommand.class)
+})
+public class MoveCommand implements Command<MovableUnit, MoveCommandResult> {
+
 
     @Override
-    public void execute() {
-        getUnit().move();
+    public MoveCommandResult execute(MovableUnit unit) {
+        Position at = unit.at();
+        unit.move();
+        return new MoveCommandResult(at, unit.at());
     }
 
     @Override
-    public Class<MovableUnit> getUnitType() {
-        return MovableUnit.class;
+    public Class<MovableUnit>[] getUnitTypes() {
+        return new Class[]{MovableUnit.class};
     }
 }

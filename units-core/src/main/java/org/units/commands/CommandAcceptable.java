@@ -1,6 +1,6 @@
 package org.units.commands;
 
-import org.units.units.Unit;
+import org.units.commands.results.CommandResult;
 
 /**
  *
@@ -8,6 +8,15 @@ import org.units.units.Unit;
  */
 public interface CommandAcceptable {
 
-    <U extends Unit> boolean accept(UnitVisitor<U> unitVisitor);
+    CommandResult accept(Command commandVisitor);
+
+    default boolean acceptCommand(Class[] unitTypes) {
+        for (Class unitType : unitTypes) {
+            if(!this.getClass().isAssignableFrom(unitType)){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

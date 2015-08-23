@@ -1,31 +1,33 @@
 package org.units.commands;
 
+import org.units.commands.Command;
+import org.units.commands.UnitDefaultCommand;
+import org.units.commands.results.CommandResult;
+import org.units.commands.results.TimeLoggableCommandResult;
+import org.units.units.Unit;
+
 /**
  * Decorator for time measurement of wrapping command
  */
 class TimeLoggableCommand extends UnitDefaultCommand {
 
-    private Command measuredCommand;
-    private long timeExecuted = -1;
+    private final Command measuredCommand;
 
-    public void setMeasuredCommand(Command measuredCommand) {
+    public TimeLoggableCommand(Command measuredCommand) {
         this.measuredCommand = measuredCommand;
     }
 
-    public long getTimeExecuted() {
-        return timeExecuted;
-    }
 
     @Override
-    public void execute() {
+    public CommandResult execute(Unit unit) {
         final long start = System.currentTimeMillis();
-        measuredCommand.execute();
-        timeExecuted = System.currentTimeMillis() - start;
+        CommandResult commandResult = measuredCommand.execute(unit);
+        return new TimeLoggableCommandResult(commandResult,System.currentTimeMillis() - start);
     }
 
     @Override
-    public Class getUnitType() {
-        return measuredCommand.getUnitType();
+    public Class[] getUnitTypes() {
+        return measuredCommand.getUnitTypes();
     }
 
 

@@ -3,7 +3,7 @@ package org.units;
 /**
  *
  */
-public class Position {
+public class Position implements Comparable<Position>{
 
     public final int X;
     public final int Y;
@@ -20,5 +20,8 @@ public class Position {
     }
 
 
-
+    @Override
+    public int compareTo(Position that) {
+        return this.X == that.X ? this.Y - that.Y : this.X - that.Y;
+    }
 }

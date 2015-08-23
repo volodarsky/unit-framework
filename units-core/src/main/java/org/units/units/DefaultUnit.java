@@ -2,6 +2,13 @@ package org.units.units;
 
 import org.units.Orientation;
 import org.units.Position;
+import org.units.commands.Command;
+import org.units.commands.results.CommandResult;
+import org.units.commands.results.FailedCommandResult;
+import org.units.event.CommandEvent;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  *
@@ -10,6 +17,7 @@ public abstract class DefaultUnit implements Unit {
 
     private Orientation orientation;
     private Position position;
+    private Queue<CommandEvent> eventQueue = new ArrayDeque<>();
 
     @Override
     public Orientation to() {
@@ -30,6 +38,22 @@ public abstract class DefaultUnit implements Unit {
     public void setAt(Position position) {
         this.position = position;
     }
+
+    @Override
+    public void onCommandEvent(CommandEvent event) {
+        eventQueue.add(event);
+    }
+
+    public CommandResult accept(Command command){
+        if(acceptCommand(command.getUnitTypes())){
+            return command.execute(this);
+        }else{
+            String msg = String.format("Command %s not accepted on %s", command, this);
+            return new FailedCommandResult(msg);
+        }
+    }
+
+
 
 
 }

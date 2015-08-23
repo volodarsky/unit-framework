@@ -1,7 +1,6 @@
 package org.units.units;
 
 import org.units.Orientation;
-import org.units.commands.UnitVisitor;
 
 /**
  *
@@ -30,8 +29,4 @@ public interface TurnableUnit extends Unit {
 
     Orientation to();
 
-    @Override
-    default <U extends Unit> boolean accept(UnitVisitor<U> unitVisitor){
-        return unitVisitor.getUnitType().isAssignableFrom(TurnableUnit.class);
-    }
 }

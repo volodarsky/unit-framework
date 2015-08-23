@@ -1,7 +1,8 @@
 package org.units.units;
 
-import org.units.commands.UnitVisitor;
-import org.units.units.DefaultUnit;
+
+import org.units.commands.Command;
+import org.units.commands.results.CommandResult;
 
 /**
  * Created on 20.08.2015.
@@ -9,8 +10,8 @@ import org.units.units.DefaultUnit;
 public class Stone extends DefaultUnit {
 
     @Override
-    public boolean accept(UnitVisitor unitVisitor) {
+    public CommandResult accept(Command command) {
         System.out.println("I'm stone. Bye bye.");
-        return false;
+        return super.accept(command);
     }
 }

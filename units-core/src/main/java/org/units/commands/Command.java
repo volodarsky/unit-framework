@@ -1,15 +1,16 @@
 package org.units.commands;
 
 
+import org.units.commands.results.CommandResult;
 import org.units.units.Unit;
 
 /**
  *
  */
-public interface Command<U extends Unit,R> extends UnitVisitor<U>{
+public interface Command<U extends Unit,R extends CommandResult> {
 
-    void execute();
+    R execute(U unit);
 
-    void setResult(R result);
+    Class<U>[] getUnitTypes();
 
 }

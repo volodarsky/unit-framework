@@ -3,11 +3,12 @@ package org.units.units;
 import org.units.Orientation;
 import org.units.Position;
 import org.units.commands.CommandAcceptable;
+import org.units.event.CommandEventListener;
 
 /**
  *
  */
-public interface Unit extends CommandAcceptable {
+public interface Unit extends CommandAcceptable, CommandEventListener {
 
     Orientation to();
 
@@ -16,5 +17,6 @@ public interface Unit extends CommandAcceptable {
     Position at();
 
     void setAt(Position position);
+
 
 }

@@ -1,5 +1,11 @@
 package org.units.commands;
 
+import org.units.commands.Command;
+import org.units.commands.UnitDefaultCommand;
+import org.units.commands.results.CommandResult;
+import org.units.commands.results.FailedCommandResult;
+import org.units.units.Unit;
+
 /**
  * Decorator for time measurement of wrapping command
  */
@@ -7,27 +13,24 @@ class ExceptionalCommand extends UnitDefaultCommand {
 
     private Command wrappedCommand;
 
-    public void setWrappedCommand(Command wrappedCommand) {
+    public ExceptionalCommand(Command wrappedCommand) {
         this.wrappedCommand = wrappedCommand;
     }
 
     @Override
-    public void execute() {
+    public CommandResult execute(Unit unit) {
         try {
-            wrappedCommand.execute();
+            return wrappedCommand.execute(unit);
         } catch (Exception e) {
-            //todo
             e.printStackTrace();
+            FailedCommandResult failedCommandResult = new FailedCommandResult(e.getMessage());
+            failedCommandResult.setException(e);
+            return failedCommandResult;
         }
     }
 
     @Override
-    public void setResult(Object result) {
-
-    }
-
-    @Override
-    public Class getUnitType() {
-        return wrappedCommand.getUnitType();
+    public Class[] getUnitTypes() {
+        return wrappedCommand.getUnitTypes();
     }
 }
