@@ -1,6 +1,8 @@
 package org.units.commands.results;
 
 import org.units.Position;
+import org.units.commands.Command;
+import org.units.units.Unit;
 
 /**
  * Created on 23.08.2015.
@@ -10,7 +12,8 @@ public class MoveCommandResult extends DefaultCommandResult {
     private final Position from;
     private final Position to;
 
-    public MoveCommandResult(Position from, Position to) {
+    public MoveCommandResult(Unit unit, Command command, Position from, Position to) {
+        super(unit, command);
         this.from = from;
         this.to = to;
     }

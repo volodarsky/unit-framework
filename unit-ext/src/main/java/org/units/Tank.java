@@ -13,7 +13,12 @@ public class Tank extends Tractor implements ShootableUnit {
     }
 
     @Override
-    public void shoot() {
-
+    public int speed() {
+        return 3;
     }
+
+    @Override
+    public void shoot() {
+    }
+
 }

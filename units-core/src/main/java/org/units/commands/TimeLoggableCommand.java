@@ -15,12 +15,15 @@ class TimeLoggableCommand implements Command {
         this.measuredCommand = measuredCommand;
     }
 
+    public Command getMeasuredCommand() {
+        return measuredCommand;
+    }
 
     @Override
     public CommandResult execute(Unit unit) {
         final long start = System.currentTimeMillis();
         CommandResult commandResult = measuredCommand.execute(unit);
-        return new TimeLoggableCommandResult(commandResult,System.currentTimeMillis() - start);
+        return new TimeLoggableCommandResult(unit, this, commandResult,System.currentTimeMillis() - start);
     }
 
     @Override
@@ -29,4 +32,9 @@ class TimeLoggableCommand implements Command {
     }
 
 
+    @Override public String toString() {
+        return "TimeLoggableCommand{" +
+                        "measuredCommand=" + measuredCommand +
+                        '}';
+    }
 }

@@ -2,6 +2,7 @@ package org.units.units;
 
 import org.units.Orientation;
 import org.units.Position;
+import org.units.UnitContainer;
 import org.units.commands.Command;
 import org.units.commands.results.CommandResult;
 import org.units.commands.results.FailedCommandResult;
@@ -20,7 +21,21 @@ public abstract class DefaultUnit implements Unit {
     private Orientation orientation;
     private Position position;
     private Queue<CommandEvent> eventQueue = new LinkedList<>();
-    private CommandEventSupport support;
+    private UnitContainer unitContainer;
+
+    public DefaultUnit() {
+        orientation = Orientation.NORTH;
+    }
+
+    @Override
+    public UnitContainer getUnitContainer() {
+        return unitContainer;
+    }
+
+    @Override
+    public void setUnitContainer(UnitContainer unitContainer) {
+        this.unitContainer = unitContainer;
+    }
 
     @Override
     public Orientation to() {
@@ -47,21 +62,22 @@ public abstract class DefaultUnit implements Unit {
         eventQueue.add(event);
     }
 
-    @Override
-    public void addCommandEventSupport(CommandEventSupport support) {
-        this.support = support;
-    }
-
     public CommandResult accept(Command command){
         if(acceptCommand(command.getUnitTypes())){
             return command.execute(this);
         }else{
             String msg = String.format("Command %s not accepted on %s", command, this);
-            return new FailedCommandResult(msg);
+            System.out.println(msg);
+            return new FailedCommandResult(this, command, msg);
         }
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return  this.getClass().getSimpleName() + "{" +
+                        "orientation=" + orientation +
+                        ", position=" + position +
+                        '}';
+    }
 }

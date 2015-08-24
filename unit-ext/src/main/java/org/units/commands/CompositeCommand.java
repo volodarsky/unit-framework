@@ -12,7 +12,7 @@ import java.util.List;
 /**
  *
  */
-public class CompositeCommand implements Command<Unit, CompositeCommandResult> {
+public class CompositeCommand implements Command {
 
     private List<Command> commands = new ArrayList<>();
 
@@ -30,8 +30,8 @@ public class CompositeCommand implements Command<Unit, CompositeCommandResult> {
     }
 
     @Override
-    public CompositeCommandResult execute(Unit unit) {
-        CompositeCommandResult compositeCommandResult = new CompositeCommandResult();
+    public CommandResult execute(Unit unit) {
+        CompositeCommandResult compositeCommandResult = new CompositeCommandResult(unit,this);
         for (Command command : commands) {
             CommandResult commandResult = command.execute(unit);
             compositeCommandResult.addResult(commandResult);

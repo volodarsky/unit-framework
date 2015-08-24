@@ -7,7 +7,7 @@ import org.units.units.Unit;
 /**
  *
  */
-public interface Command<U extends Unit,R extends CommandResult> {
+public interface Command<U extends Unit, R extends CommandResult> {
 
     R execute(U unit);
 

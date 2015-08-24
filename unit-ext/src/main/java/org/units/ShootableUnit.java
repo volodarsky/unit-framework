@@ -12,5 +12,4 @@ public interface ShootableUnit extends Unit{
     void shoot();
 
 
-
 }

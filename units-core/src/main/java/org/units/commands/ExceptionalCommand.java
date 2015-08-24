@@ -15,13 +15,17 @@ class ExceptionalCommand implements Command {
         this.wrappedCommand = wrappedCommand;
     }
 
+    public Command getWrappedCommand() {
+        return wrappedCommand;
+    }
+
     @Override
     public CommandResult execute(Unit unit) {
         try {
             return wrappedCommand.execute(unit);
         } catch (Exception e) {
-            e.printStackTrace();
-            FailedCommandResult failedCommandResult = new FailedCommandResult(e.getMessage());
+            System.out.println(e.getMessage());
+            FailedCommandResult failedCommandResult = new FailedCommandResult(unit, this, e.getMessage());
             failedCommandResult.setException(e);
             return failedCommandResult;
         }
@@ -30,5 +34,13 @@ class ExceptionalCommand implements Command {
     @Override
     public Class[] getUnitTypes() {
         return wrappedCommand.getUnitTypes();
+    }
+
+
+    @Override
+    public String toString() {
+        return "ExceptionalCommand{" +
+                        "wrappedCommand=" + wrappedCommand +
+                        '}';
     }
 }

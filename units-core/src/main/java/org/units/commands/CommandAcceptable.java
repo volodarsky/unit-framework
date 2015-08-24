@@ -12,7 +12,7 @@ public interface CommandAcceptable {
 
     default boolean acceptCommand(Class[] unitTypes) {
         for (Class unitType : unitTypes) {
-            if(!this.getClass().isAssignableFrom(unitType)){
+            if(!unitType.isAssignableFrom(this.getClass())){
                 return false;
             }
         }

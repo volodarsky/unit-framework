@@ -10,16 +10,29 @@ import org.units.units.TurnableUnit;
  */
 public class TurnCommand implements Command<TurnableUnit,TurnableCommandResult> {
 
+    private static final TurnCommand INSTANCE = new TurnCommand();
+
+    public static TurnCommand of() {
+        return INSTANCE;
+    }
+
+    private TurnCommand() {
+    }
 
     @Override
     public TurnableCommandResult execute(TurnableUnit unit) {
         Orientation to = unit.to();
         unit.turn();
-        return new TurnableCommandResult(to, unit.to());
+        return new TurnableCommandResult(unit, this, to, unit.to());
     }
 
     @Override
     public Class<TurnableUnit>[] getUnitTypes() {
         return new Class[]{TurnableUnit.class};
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

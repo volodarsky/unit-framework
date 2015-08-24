@@ -14,7 +14,13 @@ import java.util.Objects;
  */
 public class CommandFactory {
 
+
     private static Map<String, Command> commandRegistry = new HashMap<>();
+
+    static {
+        CommandFactory.registerCommand("move", MoveCommand.of());
+        CommandFactory.registerCommand("turn", TurnCommand.of());
+    }
 
     public static void registerCommand(String commandName, Command command) {
         CommandInterceptors[] annotationsByType =
@@ -35,7 +41,6 @@ public class CommandFactory {
     }
 
     private static Command appendInterceptors(CommandInterceptors[] annotationsByType, Command commandInstance) {
-
         for (CommandInterceptors commandInterceptors : annotationsByType) {
             CommandInterceptor[] interceptors = commandInterceptors.value();
             for (CommandInterceptor interceptor : interceptors) {
@@ -55,8 +60,6 @@ public class CommandFactory {
         }
         return paramInstance;
     }
-
-
 
 
 }

@@ -7,6 +7,4 @@ public interface CommandEventListener {
 
     void onCommandEvent(CommandEvent event);
 
-    void addCommandEventSupport(CommandEventSupport support);
-
 }
