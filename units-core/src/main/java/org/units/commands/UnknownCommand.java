@@ -16,7 +16,7 @@ public class UnknownCommand implements Command<Unit, FailedCommandResult> {
 
     @Override
     public FailedCommandResult execute(Unit unit) {
-        String msg = String.format("Unknown command %s executed on % unit", name, unit);
+        String msg = String.format("Unknown command %s executed on %s unit", name, unit);
         System.out.println(msg);
         return new FailedCommandResult(unit, this, msg);
     }
