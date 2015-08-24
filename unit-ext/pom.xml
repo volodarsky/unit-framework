@@ -8,6 +8,12 @@
     <artifactId>unit-ext</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.units</groupId>
+        <artifactId>unit-framework</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>org.units</groupId>
