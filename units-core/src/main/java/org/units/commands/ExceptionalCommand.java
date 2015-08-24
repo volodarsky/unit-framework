@@ -7,7 +7,7 @@ import org.units.units.Unit;
 /**
  * Decorator for time measurement of wrapping command
  */
-class ExceptionalCommand implements Command {
+public class ExceptionalCommand implements Command {
 
     private Command wrappedCommand;
 

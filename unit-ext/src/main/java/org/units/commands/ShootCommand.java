@@ -4,9 +4,19 @@ import org.units.ShootableUnit;
 import org.units.commands.results.ShootCommandResult;
 
 /**
- * Created on 23.08.2015.
+ *
  */
+
 public class ShootCommand implements Command<ShootableUnit, ShootCommandResult>{
+
+    // stateless commands cached as singletons
+    private static ShootCommand INSTANCE = new ShootCommand();
+    public static ShootCommand of(){
+        return INSTANCE;
+    }
+
+    private ShootCommand() {
+    }
 
     @Override
     public ShootCommandResult execute(ShootableUnit unit) {

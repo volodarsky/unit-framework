@@ -7,7 +7,7 @@ import org.units.units.Unit;
 /**
  * Decorator for time measurement of wrapping command
  */
-class TimeLoggableCommand implements Command {
+public class TimeLoggableCommand implements Command {
 
     private final Command measuredCommand;
 

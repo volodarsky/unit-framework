@@ -4,8 +4,6 @@ import org.units.CommandExecutionException;
 import org.units.Orientation;
 import org.units.Position;
 
-import java.util.Objects;
-
 /**
  *
  */

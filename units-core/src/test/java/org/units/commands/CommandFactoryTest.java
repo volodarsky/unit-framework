@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * Created on 22.08.2015.
+ *
  */
 public class CommandFactoryTest {
 

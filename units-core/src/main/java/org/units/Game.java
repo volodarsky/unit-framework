@@ -2,56 +2,61 @@ package org.units;
 
 import org.units.commands.Command;
 import org.units.commands.CommandFactory;
-import org.units.commands.MoveCommand;
-import org.units.commands.TurnCommand;
 import org.units.commands.results.CommandResult;
-import org.units.commands.rollback.Rollbackable;
+import org.units.commands.rollback.RollbackFailedException;
+import org.units.event.DefaultCommandEvent;
 import org.units.units.Stone;
 import org.units.units.Tractor;
 import org.units.units.Unit;
 import org.units.units.Wind;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 /**
  *
  */
 public class Game {
 
-
     protected Board board = new Board(5, 5);
     protected List<Command> commands = new ArrayList<>();
-    protected Deque<CommandResult> history = new ArrayDeque<>();
 
     public static void main(String[] args) {
 
         Game game = new Game();
+
+        // just run with params like :  move turn some move ...
         for (String arg : args) {
             game.commands.add(CommandFactory.getCommand(arg));
         }
         game.play();
-
         game.printHistory();
+        // try to rollback last command - kind realization of pattern Memento for board
+        // todo: think about command events invalidation model
         game.undo();
 
     }
 
     private void printHistory() {
         System.out.println("\n### Commands history ###\n");
-        for (CommandResult commandResult : history) {
+        for (CommandResult commandResult : board.getCommandResults()) {
             System.out.println(commandResult);
         }
         System.out.println("\n###########################\n");
     }
 
     private void undo() {
+        final Deque<CommandResult> history = board.getCommandResults();
         final CommandResult last = history.getLast();
         final Command command = last.getCommand();
-        if(command instanceof Rollbackable){
-            ((Rollbackable) command).rollback(last.getUnit(),last);
+        try {
+            // try to rollback last command
+            command.rollback(last.getUnit(), last);
+            // remove last history element
             history.removeLast();
-        }else{
-            System.out.println("Can't rollback : " + last);
+        } catch (RollbackFailedException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -65,7 +70,11 @@ public class Game {
         for (Command command : commands) {
             for (Unit unit : units) {
                 CommandResult commandResult = unit.accept(command);
-                history.addLast(commandResult);
+                // fire command event
+                //todo: don't fire unsuceesfull events
+                board.fireEvent(unit, new DefaultCommandEvent(commandResult));
+                // add result to history
+                board.getCommandResults().addLast(commandResult);
             }
         }
     }

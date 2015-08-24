@@ -4,7 +4,7 @@ import org.units.commands.Command;
 import org.units.units.Unit;
 
 /**
- * Created on 23.08.2015.
+ * "
  */
 public class FailedCommandResult extends DefaultCommandResult{
 

@@ -5,7 +5,7 @@ import org.units.commands.Command;
 import org.units.commands.results.CommandResult;
 
 /**
- * Created on 20.08.2015.
+ * "
  */
 public class Stone extends DefaultUnit {
 

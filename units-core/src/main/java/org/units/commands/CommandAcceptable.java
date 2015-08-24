@@ -3,7 +3,7 @@ package org.units.commands;
 import org.units.commands.results.CommandResult;
 
 /**
- *
+ *  Unit acceptable in Visitor pattern
  *
  */
 public interface CommandAcceptable {

@@ -6,12 +6,12 @@ import org.units.commands.results.TurnableCommandResult;
 import org.units.units.TurnableUnit;
 
 /**
- * Created on 20.08.2015.
+ * "
  */
 public class TurnCommand implements Command<TurnableUnit,TurnableCommandResult> {
 
+    // stateless commands cached as singletons
     private static final TurnCommand INSTANCE = new TurnCommand();
-
     public static TurnCommand of() {
         return INSTANCE;
     }

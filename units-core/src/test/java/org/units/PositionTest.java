@@ -4,9 +4,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
- * @author vladimir.romanov
- * @version 1.0
- * @since UP...
+ *
  */
 public class PositionTest extends TestCase {
 

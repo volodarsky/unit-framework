@@ -10,10 +10,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Created on 22.08.2015.
+ * Factory for commands (Factory method pattern + Registry)
  */
 public class CommandFactory {
-
 
     private static Map<String, Command> commandRegistry = new HashMap<>();
 
@@ -40,6 +39,13 @@ public class CommandFactory {
         }
     }
 
+    /**
+     * Creates target command packed to interceptors wrappers.
+     *
+     * @param annotationsByType
+     * @param commandInstance
+     * @return
+     */
     private static Command appendInterceptors(CommandInterceptors[] annotationsByType, Command commandInstance) {
         for (CommandInterceptors commandInterceptors : annotationsByType) {
             CommandInterceptor[] interceptors = commandInterceptors.value();

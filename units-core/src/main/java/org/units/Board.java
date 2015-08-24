@@ -8,19 +8,17 @@ import org.units.units.Unit;
 import java.util.*;
 
 /**
- * Created on 23.08.2015.
+ * Board act as mediator that fires events to listen units.
  */
 public class Board implements CommandEventSupport, UnitContainer{
 
     private final int X;
     private final int Y;
 
+    // to get range of units by its positions
     private NavigableMap<Position,Unit> unitPositionsMap = new TreeMap<>();
+    // two way queue for printing history and get last for rollback
     private Deque<CommandResult> commandResults = new ArrayDeque<>();
-
-    private PriorityQueue<Unit> units = new PriorityQueue<>((u1, u2) -> {
-        return u1.at().compareTo(u2.at());
-    });
 
     public Board(int X, int Y) {
         this.X = X;
@@ -65,6 +63,9 @@ public class Board implements CommandEventSupport, UnitContainer{
         commandResults.add(result);
     }
 
+    public Deque<CommandResult> getCommandResults() {
+        return commandResults;
+    }
 
     @Override
     public void fireEvent(Unit unit, CommandEvent event) {

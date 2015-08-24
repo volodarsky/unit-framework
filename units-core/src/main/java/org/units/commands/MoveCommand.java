@@ -8,7 +8,6 @@ import org.units.commands.rollback.RollbackFailedException;
 import org.units.commands.rollback.Rollbackable;
 import org.units.units.MovableUnit;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -20,8 +19,8 @@ import java.util.Objects;
 })
 public class MoveCommand implements Command<MovableUnit, MoveCommandResult>, Rollbackable<MovableUnit, MoveCommandResult> {
 
+    // stateless commands cached as singletons
     private static MoveCommand INSTANCE = new MoveCommand();
-
     public static MoveCommand of(){
         return INSTANCE;
     }
